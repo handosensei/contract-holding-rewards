@@ -1,0 +1,72 @@
+
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+
+Migrations dry-run (simulation)
+===============================
+> Network name:    'sepolia-fork'
+> Network id:      11155111
+> Block gas limit: 30000000 (0x1c9c380)
+
+
+1_holding_reward.js
+===================
+
+   Deploying 'MetaLifeHoldingReward'
+   ---------------------------------
+   > block number:        4253483
+   > block timestamp:     1694254228
+   > account:             0x5d3aF633f4DAA8B6880cCb4D2b4b8BDb6097B153
+   > balance:             1.783863117027134541
+   > gas used:            4423536 (0x437f70)
+   > gas price:           2.500020318 gwei
+   > value sent:          0 ETH
+   > total cost:          0.011058929877404448 ETH
+
+   -------------------------------------
+   > Total cost:     0.011058929877404448 ETH
+
+Summary
+=======
+> Total deployments:   1
+> Final cost:          0.011058929877404448 ETH
+
+
+
+
+Starting migrations...
+======================
+> Network name:    'sepolia'
+> Network id:      11155111
+> Block gas limit: 30000000 (0x1c9c380)
+
+
+1_holding_reward.js
+===================
+
+   Deploying 'MetaLifeHoldingReward'
+   ---------------------------------
+   > transaction hash:    0x79f1798a499f73caa182e68d2e229509ab80d57408474c1352c7c27fe0f98d0f
+   > Blocks: 0            Seconds: 16
+   > contract address:    0xE2cDAe97Bad1a2193412eB3A7EB36454Fd799357
+   > block number:        4253489
+   > block timestamp:     1694254248
+   > account:             0x5d3aF633f4DAA8B6880cCb4D2b4b8BDb6097B153
+   > balance:             1.783863069111392589
+   > gas used:            4423536 (0x437f70)
+   > gas price:           2.50003115 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0110589777931464 ETH
+
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:     0.0110589777931464 ETH
+
+Summary
+=======
+> Total deployments:   1
+> Final cost:          0.0110589777931464 ETH
+
+

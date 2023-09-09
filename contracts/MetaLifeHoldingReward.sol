@@ -6,10 +6,10 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-/// @title Meta-Life: Holding rewards
+/// @title Meta-Life: Holding reward
 /// @author Hando Masahashi
 /// @notice This smart contract is used for reward holders
-contract HoldingReward is ERC1155, Ownable, ReentrancyGuard {
+contract MetaLifeHoldingReward is ERC1155, Ownable, ReentrancyGuard {
 
     using Strings for uint256;
     string public baseURI = "";
