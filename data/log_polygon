@@ -16,13 +16,13 @@ Starting migrations...
 
    Replacing 'MetaLifeHoldingReward'
    ---------------------------------
-   > transaction hash:    0x1f3a37e60b214446aa15d8898a2ad7c6871e5f126d27d5e1b8b0133b34730a6a
+   > transaction hash:    0xe893b6facf984672e0043d66cc2f5f32b4851fb254ed86f5d59ad9786ba4e19d
    > Blocks: 2            Seconds: 4
-   > contract address:    0x3cf1e6c94bE8812072733db3B616A5B9629527CA
-   > block number:        47364661
-   > block timestamp:     1694331712
+   > contract address:    0x6B3Ab085df8e11dFBaF156e77Fe23Def175Efdec
+   > block number:        47370304
+   > block timestamp:     1694343927
    > account:             0x9CBD96550b5BD4D1c16B54B09B84fEB594D4A6aa
-   > balance:             37.868715624846543707
+   > balance:             35.613874644846543707
    > gas used:            4797534 (0x49345e)
    > gas price:           470 gwei
    > value sent:          0 ETH

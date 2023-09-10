@@ -130,7 +130,7 @@ contract LegendsZoneRewards is ERC1155, Ownable, ReentrancyGuard {
         require(remaining(msg.sender, _tokenId) >= _quantity, "Quantity greater than remaining");
         require(tokenCollection[_tokenId].mintable, "Token reward close");
         require(tokenCollection[_tokenId].totalSupply + _quantity <= tokenCollection[_tokenId].maxSupply, "Not enough supply");
-        require(block.timestamp < limitMintSpecific, "Holding reward mint close");
+        require(block.timestamp < tokenCollection[_tokenId].expireAt, "Holding reward mint close");
         holderEligibilities[msg.sender][_tokenId].claimed += _quantity;
         tokenCollection[_tokenId].totalSupply += _quantity;
         _mint(msg.sender, _tokenId, _quantity, "");
