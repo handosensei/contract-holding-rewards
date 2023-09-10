@@ -49,8 +49,8 @@ contract LegendsZoneRewards is ERC1155, Ownable, ReentrancyGuard {
 
     constructor() ERC1155("") {
         collector = payable(msg.sender);
-
-        uint256 expireAt = block.timestamp + (152 * 24 * 60 * 60);
+        // expire at 2024 06 30
+        uint256 expireAt = 1719784799;
         addToken("cyber-weapon", true, false, 15000, ID_CYBER_WEAPON, expireAt);
         addToken("cyber-armor", false, false, 15000, ID_CYBER_ARMOR, expireAt);
         addToken("rough-pet", false, false, 15000, ID_ROUGH_PET, expireAt);
