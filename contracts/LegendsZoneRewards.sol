@@ -23,6 +23,8 @@ contract LegendsZoneRewards is ERC1155, Ownable, ReentrancyGuard {
     uint256 public constant ID_PARTICLE_COSMETIC_EFFECT = 7;
     uint256 public constant ID_SHADOW_GEM = 8;
 
+    address payable public collector;
+
     struct TokenReward {
         uint256 id;
         string name;
@@ -46,6 +48,8 @@ contract LegendsZoneRewards is ERC1155, Ownable, ReentrancyGuard {
     event Burned(address indexed from, uint256 timestamp, uint256 tokenId, uint256 quantity);
 
     constructor() ERC1155("") {
+        collector = payable(msg.sender);
+
         uint256 expireAt = block.timestamp + (152 * 24 * 60 * 60);
         addToken("cyber-weapon", true, false, 15000, ID_CYBER_WEAPON, expireAt);
         addToken("cyber-armor", false, false, 15000, ID_CYBER_ARMOR, expireAt);
@@ -55,6 +59,14 @@ contract LegendsZoneRewards is ERC1155, Ownable, ReentrancyGuard {
         addToken("ml-network-pass", false, false, 12000, ID_ML_NETWORK_PASS, expireAt);
         addToken("particle-cosmetic-effect", false, false, 12000, ID_PARTICLE_COSMETIC_EFFECT, expireAt);
         addToken("shadow-gem", false, false, 8000, ID_SHADOW_GEM, expireAt);
+    }
+
+    function withdrawAll() public payable onlyOwner {
+        collector.transfer(address(this).balance);
+    }
+
+    function setCollector(address payable _newCollector) public onlyOwner {
+        collector = _newCollector;
     }
 
     function toggleTokenMint(uint256 _tokenId) public onlyOwner {
