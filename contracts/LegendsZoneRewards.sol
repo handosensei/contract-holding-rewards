@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 /// @title Meta-Life: Holding reward
 /// @author Hando Masahashi
 /// @notice This smart contract is used for reward holders
-contract MetaLifeHoldingReward is ERC1155, Ownable, ReentrancyGuard {
+contract LegendsZoneRewards is ERC1155, Ownable, ReentrancyGuard {
 
     using Strings for uint256;
     string public baseURI = "";
@@ -30,6 +30,7 @@ contract MetaLifeHoldingReward is ERC1155, Ownable, ReentrancyGuard {
         bool mintable;
         bool burnable;
         uint256 maxSupply;
+        uint256 expireAt;
     }
 
     struct Eligibility {
@@ -37,7 +38,6 @@ contract MetaLifeHoldingReward is ERC1155, Ownable, ReentrancyGuard {
         uint256 claimed;
     }
 
-    uint256 public limitMintSpecific = 0;
     mapping(address => mapping(uint256 => Eligibility)) public holderEligibilities;
     mapping(uint256 => TokenReward) public tokenCollection;
 
@@ -46,16 +46,15 @@ contract MetaLifeHoldingReward is ERC1155, Ownable, ReentrancyGuard {
     event Burned(address indexed from, uint256 timestamp, uint256 tokenId, uint256 quantity);
 
     constructor() ERC1155("") {
-        addToken("cyber-weapon", true, false, 15000, ID_CYBER_WEAPON);
-        addToken("cyber-armor", false, false, 15000, ID_CYBER_ARMOR);
-        addToken("rough-pet", false, false, 15000, ID_ROUGH_PET);
-        addToken("roboter-weapon",  false, false, 15000, ID_ROBOTER_WEAPON);
-        addToken("matrix-angel-car", false, false, 15000, ID_MATRIX_ANGEL_CAR);
-        addToken("ml-network-pass", false, false, 12000, ID_ML_NETWORK_PASS);
-        addToken("particle-cosmetic-effect", false, false, 12000, ID_PARTICLE_COSMETIC_EFFECT);
-        addToken("shadow-gem", false, false, 8000, ID_SHADOW_GEM);
-
-        limitMintSpecific = block.timestamp + ((365/2) * 24 * 60 * 60);
+        uint256 expireAt = block.timestamp + (152 * 24 * 60 * 60);
+        addToken("cyber-weapon", true, false, 15000, ID_CYBER_WEAPON, expireAt);
+        addToken("cyber-armor", false, false, 15000, ID_CYBER_ARMOR, expireAt);
+        addToken("rough-pet", false, false, 15000, ID_ROUGH_PET, expireAt);
+        addToken("roboter-weapon",  false, false, 15000, ID_ROBOTER_WEAPON, expireAt);
+        addToken("matrix-angel-car", false, false, 15000, ID_MATRIX_ANGEL_CAR, expireAt);
+        addToken("ml-network-pass", false, false, 12000, ID_ML_NETWORK_PASS, expireAt);
+        addToken("particle-cosmetic-effect", false, false, 12000, ID_PARTICLE_COSMETIC_EFFECT, expireAt);
+        addToken("shadow-gem", false, false, 8000, ID_SHADOW_GEM, expireAt);
     }
 
     function toggleTokenMint(uint256 _tokenId) public onlyOwner {
@@ -91,14 +90,15 @@ contract MetaLifeHoldingReward is ERC1155, Ownable, ReentrancyGuard {
         return bytes(uri).length > 0 ? string(abi.encodePacked(uri, _tokenId.toString())) : "";
     }
 
-    function addToken(string memory _name, bool _mintable, bool _burnable, uint256 _maxSupply, uint256 _id) public onlyOwner {
+    function addToken(string memory _name, bool _mintable, bool _burnable, uint256 _maxSupply, uint256 _id, uint256 _expireAt) public onlyOwner {
         tokenCollection[_id] = TokenReward({
             id: _id,
             name: _name,
             totalSupply: 0,
             mintable: _mintable,
             burnable: _burnable,
-            maxSupply: _maxSupply
+            maxSupply: _maxSupply,
+            expireAt: _expireAt
         });
     }
 
