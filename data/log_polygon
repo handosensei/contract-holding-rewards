@@ -8,33 +8,32 @@ Starting migrations...
 ======================
 > Network name:    'polygon'
 > Network id:      137
-> Block gas limit: 30000000 (0x1c9c380)
+> Block gas limit: 30472174 (0x1d0f7ee)
 
 
-1_holding_reward.js
-===================
+1_legends_zone_reward.js
+========================
 
-   Replacing 'MetaLifeHoldingReward'
-   ---------------------------------
-   > transaction hash:    0xe893b6facf984672e0043d66cc2f5f32b4851fb254ed86f5d59ad9786ba4e19d
-   > Blocks: 2            Seconds: 4
-   > contract address:    0x6B3Ab085df8e11dFBaF156e77Fe23Def175Efdec
-   > block number:        47370304
-   > block timestamp:     1694343927
+   Deploying 'LegendsZoneRewards'
+   ------------------------------
+   > transaction hash:    0x64c4067ec12202f3259a3194e377be55b4b18659bb5ea876458e2cbdc4144350
+   > Blocks: 3            Seconds: 4
+   > contract address:    0x805b7Ff6BDBbAE8E3443D3E94A6bA6c3f6077e09
+   > block number:        47370532
+   > block timestamp:     1694344411
    > account:             0x9CBD96550b5BD4D1c16B54B09B84fEB594D4A6aa
-   > balance:             35.613874644846543707
-   > gas used:            4797534 (0x49345e)
+   > balance:             33.178913684846543707
+   > gas used:            5180768 (0x4f0d60)
    > gas price:           470 gwei
    > value sent:          0 ETH
-   > total cost:          2.25484098 ETH
+   > total cost:          2.43496096 ETH
 
    > Saving artifacts
    -------------------------------------
-   > Total cost:          2.25484098 ETH
+   > Total cost:          2.43496096 ETH
 
 Summary
 =======
 > Total deployments:   1
-> Final cost:          2.25484098 ETH
-
+> Final cost:          2.43496096 ETH
 
