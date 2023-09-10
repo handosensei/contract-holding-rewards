@@ -2,7 +2,7 @@ const path = require("path");
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 require('dotenv').config();
 
-const { MNEMONIC_TEST, INFURA_API_KEY_SEPOLIA, INFURA_API_KEY_POLYGON  } = process.env;
+const { MNEMONIC_TEST, MNEMONIC_PROD, INFURA_API_KEY_SEPOLIA, INFURA_API_KEY_POLYGON  } = process.env;
 
 module.exports = {
 
@@ -17,7 +17,8 @@ module.exports = {
       new HDWalletProvider({
         mnemonic:       {phrase: `${MNEMONIC_TEST}`},
         providerOrUrl:  `${INFURA_API_KEY_SEPOLIA}`,
-        pollingInterval: 30000
+        pollingInterval: 30000,
+        gasPrice: 470000000000,
       }),
       network_id: 11155111
     },
@@ -26,10 +27,25 @@ module.exports = {
     //   new HDWalletProvider({
     //     mnemonic:       {phrase: `${MNEMONIC_PROD}`},
     //     providerOrUrl:  `${INFURA_API_KEY_POLYGON}`,
-    //     pollingInterval: 30000
+    //     gasPrice: 470000000000,
     //   }),
-    //   network_id: 1
+    //   network_id: 137
     // },
+    polygonmumbai: {
+      provider: () => new HDWalletProvider(`${MNEMONIC_TEST}`, `https://rpc-mumbai.maticvigil.com`),
+      network_id: 80001,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    },
+    polygon: {
+      provider: () => new HDWalletProvider(`${MNEMONIC_PROD}`, `${INFURA_API_KEY_POLYGON}`),
+      network_id: 137,
+      // confirmations: 2,
+      // timeoutBlocks: 200,
+      // skipDryRun: true,
+      gasPrice: 470000000000
+    },
   },
   mocha: {},
   compilers: {

@@ -28,6 +28,7 @@ contract MetaLifeHoldingReward is ERC1155, Ownable, ReentrancyGuard {
         string name;
         uint256 totalSupply;
         bool mintable;
+        bool burnable;
         uint256 maxSupply;
     }
 
@@ -40,28 +41,37 @@ contract MetaLifeHoldingReward is ERC1155, Ownable, ReentrancyGuard {
     mapping(address => mapping(uint256 => Eligibility)) public holderEligibilities;
     mapping(uint256 => TokenReward) public tokenCollection;
 
-    event Minted(address indexed from, uint256 timestamp, uint256 tokenId, uint256 quantity);
     event AddedEligibility(uint256 countAddresses, uint256 total);
+    event Minted(address indexed from, uint256 timestamp, uint256 tokenId, uint256 quantity);
+    event Burned(address indexed from, uint256 timestamp, uint256 tokenId, uint256 quantity);
 
     constructor() ERC1155("") {
-        addToken("cyber-weapon", true, 15000, ID_CYBER_WEAPON);
-        addToken("cyber-armor", false, 15000, ID_CYBER_ARMOR);
-        addToken("rough-pet", false, 15000, ID_ROUGH_PET);
-        addToken("roboter-weapon",  false, 15000, ID_ROBOTER_WEAPON);
-        addToken("matrix-angel-car", false, 15000, ID_MATRIX_ANGEL_CAR);
-        addToken("ml-network-pass", false, 12000, ID_ML_NETWORK_PASS);
-        addToken("particle-cosmetic-effect", false, 12000, ID_PARTICLE_COSMETIC_EFFECT);
-        addToken("shadow-gem", false, 8000, ID_SHADOW_GEM);
+        addToken("cyber-weapon", true, false, 15000, ID_CYBER_WEAPON);
+        addToken("cyber-armor", false, false, 15000, ID_CYBER_ARMOR);
+        addToken("rough-pet", false, false, 15000, ID_ROUGH_PET);
+        addToken("roboter-weapon",  false, false, 15000, ID_ROBOTER_WEAPON);
+        addToken("matrix-angel-car", false, false, 15000, ID_MATRIX_ANGEL_CAR);
+        addToken("ml-network-pass", false, false, 12000, ID_ML_NETWORK_PASS);
+        addToken("particle-cosmetic-effect", false, false, 12000, ID_PARTICLE_COSMETIC_EFFECT);
+        addToken("shadow-gem", false, false, 8000, ID_SHADOW_GEM);
 
         limitMintSpecific = block.timestamp + ((365/2) * 24 * 60 * 60);
     }
 
-    function toggleTokenMint(uint256 _id) public onlyOwner {
-        tokenCollection[_id].mintable = !tokenCollection[_id].mintable;
+    function toggleTokenMint(uint256 _tokenId) public onlyOwner {
+        tokenCollection[_tokenId].mintable = !tokenCollection[_tokenId].mintable;
     }
 
-    function getTokenRewardStatus(uint256 _id) public view returns (bool) {
-        return tokenCollection[_id].mintable;
+    function toggleTokenBurnable(uint256 _tokenId) public onlyOwner {
+        tokenCollection[_tokenId].burnable = !tokenCollection[_tokenId].burnable;
+    }
+
+    function getTokenRewardStatus(uint256 _tokenId) public view returns (bool) {
+        return tokenCollection[_tokenId].mintable;
+    }
+
+    function isBurnable(uint256 _tokenId) public view returns (bool) {
+        return tokenCollection[_tokenId].burnable;
     }
 
     function remaining(address wallet, uint256 _tokenId) public view virtual returns (uint256) {
@@ -81,12 +91,13 @@ contract MetaLifeHoldingReward is ERC1155, Ownable, ReentrancyGuard {
         return bytes(uri).length > 0 ? string(abi.encodePacked(uri, _tokenId.toString())) : "";
     }
 
-    function addToken(string memory _name, bool _mintable, uint256 _maxSupply, uint256 _id) public onlyOwner {
+    function addToken(string memory _name, bool _mintable, bool _burnable, uint256 _maxSupply, uint256 _id) public onlyOwner {
         tokenCollection[_id] = TokenReward({
             id: _id,
             name: _name,
             totalSupply: 0,
             mintable: _mintable,
+            burnable: _burnable,
             maxSupply: _maxSupply
         });
     }
@@ -113,5 +124,14 @@ contract MetaLifeHoldingReward is ERC1155, Ownable, ReentrancyGuard {
         _mint(msg.sender, _tokenId, _quantity, "");
 
         emit Minted(msg.sender, block.timestamp, _tokenId, _quantity);
+    }
+
+    function burn(uint256 _tokenId, uint256 _quantity) external {
+        require(tokenCollection[_tokenId].burnable, "Cant burn token");
+        require(balanceOf(msg.sender, _tokenId) >= _quantity, "Not enought token to burn");
+
+        _burn(msg.sender, _tokenId, _quantity);
+
+        emit Burned(msg.sender, block.timestamp, _tokenId, _quantity);
     }
 }
