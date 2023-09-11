@@ -48,6 +48,7 @@ contract LegendsZoneRewards is ERC1155, Ownable, ReentrancyGuard {
     event Burned(address indexed from, uint256 timestamp, uint256 tokenId, uint256 quantity);
 
     constructor() ERC1155("") {
+        baseURI = "https://metalegends.mypinata.cloud/ipfs/QmPnU31j4HUMzXSd1oSCJLhYWjqZFAwX5kZVkWYzrBRzGD/";
         collector = payable(msg.sender);
         // expire at 2024 06 30
         uint256 expireAt = 1719784799;
@@ -97,9 +98,8 @@ contract LegendsZoneRewards is ERC1155, Ownable, ReentrancyGuard {
         return baseURI;
     }
 
-    function tokenURI(uint256 _tokenId) public view virtual returns (string memory) {
-        string memory uri = _baseURI();
-        return bytes(uri).length > 0 ? string(abi.encodePacked(uri, _tokenId.toString())) : "";
+    function uri(uint256 _tokenId) public view virtual override returns (string memory) {
+        return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, _tokenId.toString())) : "";
     }
 
     function addToken(string memory _name, bool _mintable, bool _burnable, uint256 _maxSupply, uint256 _id, uint256 _expireAt) public onlyOwner {
