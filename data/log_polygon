@@ -1,3 +1,8 @@
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+
 Starting migrations...
 ======================
 > Network name:    'polygon'
@@ -8,25 +13,26 @@ Starting migrations...
 1_legends_zone_reward.js
 ========================
 
-   Replacing 'LegendsZoneRewards'
+   Deploying 'LegendsZoneRewards'
    ------------------------------
-   > transaction hash:    0xb1c46c3c8a78a37c1f18292ce621c1b19e431766d69b09e584ad5214b3490daa
-   > Blocks: 2            Seconds: 4
-   > contract address:    0xEB386a02352e0C0aC2520EB3039325703c443F70
-   > block number:        47372651
-   > block timestamp:     1694348941
+   > transaction hash:    0xbf59f1bddf8eaba1fa69db62ec9fd4a1c3c4c855d7d61ba8982e7de3e2abe380
+   > Blocks: 3            Seconds: 4
+   > contract address:    0x51aB7043422b8d908032573c637FE32912CFB1E7
+   > block number:        47399381
+   > block timestamp:     1694406859
    > account:             0x9CBD96550b5BD4D1c16B54B09B84fEB594D4A6aa
-   > balance:             30.744691094846543707
-   > gas used:            5179197 (0x4f073d)
+   > balance:             27.931894878265257873
+   > gas used:            5218057 (0x4f9f09)
    > gas price:           470 gwei
    > value sent:          0 ETH
-   > total cost:          2.43422259 ETH
+   > total cost:          2.45248679 ETH
 
    > Saving artifacts
    -------------------------------------
-   > Total cost:          2.43422259 ETH
+   > Total cost:          2.45248679 ETH
 
 Summary
 =======
 > Total deployments:   1
-> Final cost:          2.43422259 ETH
+> Final cost:          2.45248679 ETH
+
